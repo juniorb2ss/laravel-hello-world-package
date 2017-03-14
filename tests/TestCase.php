@@ -4,9 +4,8 @@ namespace juniorb2ss\LaravelHelloWorldPackage;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage;
 use Mockery;
-use PHPUnit\Framework\TestCase as BaseTestCase;
 
-class TestCase extends BaseTestCase
+class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @inheritDoc
