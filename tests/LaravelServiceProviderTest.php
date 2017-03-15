@@ -4,6 +4,7 @@ namespace juniorb2ss\LaravelHelloWorldPackage\Tests;
 use Illuminate\Contracts\Foundation\Application as ApplicationInterface;
 use juniorb2ss\LaravelHelloWorldPackage\Providers\LaravelServiceProvider;
 use juniorb2ss\LaravelHelloWorldPackage\TestCase;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Mockery;
 use ArrayAccess;
 
@@ -32,5 +33,25 @@ class LaravelServiceProviderTest extends TestCase
     public function testBoot()
     {
         $this->provider->boot();
+    }
+
+    /**
+     * Test getConfigRepository
+     */
+    public function testGetConfigRepository()
+    {
+        $method = $this->getProtectedMethod(LaravelServiceProvider::class, 'getConfigRepository');
+        $this->assertEquals(
+            $this->config,
+            $method->invokeArgs($this->provider, [])
+        );
+    }
+
+    /**
+     * Test Register
+     */
+    public function testRegister()
+    {
+        $this->assertNull($this->provider->register());
     }
 }

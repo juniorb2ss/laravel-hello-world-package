@@ -34,6 +34,19 @@ class TestCase extends \PHPUnit_Framework_TestCase
         });
     }
 
+    /**
+     * [getMethod description]
+     * @param  [type] $name [description]
+     * @return [type]       [description]
+     */
+    protected static function getProtectedMethod($class, $name)
+    {
+        $class = new \ReflectionClass($class);
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method;
+    }
+
     protected function getPackageInstance()
     {
         return new LaravelHelloWorldPackage($this->config);
