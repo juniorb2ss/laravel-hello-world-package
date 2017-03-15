@@ -10,9 +10,7 @@ class LaravelHelloWorldPackage
 {
 
     /**
-     * [__construct description]
-     * @param Factory          $views  [description]
-     * @param ConfigRepository $config [description]
+     * @param ConfigRepository $config 
      */
     public function __construct(ConfigRepository $config)
     {
@@ -20,8 +18,8 @@ class LaravelHelloWorldPackage
     }
 
     /**
-     * [hasConfig description]
-     * @return boolean [description]
+     * Has config key?
+     * @return boolean 
      */
     private function hasConfig($config)
     {
@@ -29,8 +27,8 @@ class LaravelHelloWorldPackage
     }
 
     /**
-     * [getConfig description]
-     * @return [type] [description]
+     * Get config value
+     * @return mix
      */
     public function getConfig($config)
     {
@@ -42,8 +40,8 @@ class LaravelHelloWorldPackage
     }
 
     /**
-     * [getMessageStringFromConfig description]
-     * @return [type] [description]
+     * Return string message
+     * @return string
      */
     private function getMessageStringFromConfig()
     {
@@ -51,8 +49,8 @@ class LaravelHelloWorldPackage
     }
 
     /**
-     * [output description]
-     * @return [type] [description]
+     * Get string message
+     * @return string
      */
     public function output()
     {

@@ -35,9 +35,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * [getMethod description]
-     * @param  [type] $name [description]
-     * @return [type]       [description]
+     * Get protected method reflection
      */
     protected static function getProtectedMethod($class, $name)
     {
@@ -47,6 +45,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
         return $method;
     }
 
+    /**
+     * Get package class instance
+     * @return \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage
+     */
     protected function getPackageInstance()
     {
         return new LaravelHelloWorldPackage($this->config);

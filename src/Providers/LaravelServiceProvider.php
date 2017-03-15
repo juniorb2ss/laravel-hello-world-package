@@ -20,7 +20,7 @@ class LaravelServiceProvider extends ServiceProvider
     }
 
     /**
-     * @return Repository
+     * @return \Illuminate\Contracts\Config\Repository
      */
     protected function getConfigRepository()
     {
@@ -30,8 +30,8 @@ class LaravelServiceProvider extends ServiceProvider
     }
 
     /**
-     * [registerPublishConfig description]
-     * @return [type] [description]
+     * Publish config file
+     * @return void
      */
     public function registerPublishConfig()
     {
