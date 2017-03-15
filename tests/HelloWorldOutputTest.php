@@ -7,7 +7,11 @@ use juniorb2ss\LaravelHelloWorldPackage\TestCase;
  *
  */
 class HelloWorldOutputTest extends TestCase
-{
+{   
+    /**
+     * @test 
+     * @covers LaravelHelloWorldPackage::output
+     */
     public function testOutputIsHelloWorldString()
     {
         $package = $this->getPackageInstance();
