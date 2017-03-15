@@ -18,6 +18,7 @@ class LaravelHelloWorldPackage
 
     /**
      * Has config key?
+     * @param string $config
      * @return boolean
      */
     private function hasConfig($config)
