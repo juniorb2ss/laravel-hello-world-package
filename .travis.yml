@@ -5,6 +5,10 @@ php:
   - 7.0
   - 7.1
   - hhvm
+  
+addons:
+    code_climate:
+        repo_token: 918fd8b63058e1963df1d1093b50476bb59d9261df2c09ca4159577483c98de5
 
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
