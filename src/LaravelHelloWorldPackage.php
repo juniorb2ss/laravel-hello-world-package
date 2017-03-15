@@ -10,7 +10,7 @@ class LaravelHelloWorldPackage
 {
 
     /**
-     * @param ConfigRepository $config 
+     * @param ConfigRepository $config
      */
     public function __construct(ConfigRepository $config)
     {
@@ -19,7 +19,7 @@ class LaravelHelloWorldPackage
 
     /**
      * Has config key?
-     * @return boolean 
+     * @return boolean
      */
     private function hasConfig($config)
     {
