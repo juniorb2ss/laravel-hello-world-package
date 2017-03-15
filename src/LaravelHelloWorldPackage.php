@@ -3,7 +3,6 @@
 namespace juniorb2ss\LaravelHelloWorldPackage;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\View\Factory;
 use juniorb2ss\LaravelHelloWorldPackage\Exceptions\ConfigNotFoundException;
 
 class LaravelHelloWorldPackage
@@ -28,6 +27,7 @@ class LaravelHelloWorldPackage
 
     /**
      * Get config value
+     * @param string $config
      * @return mix
      */
     public function getConfig($config)
