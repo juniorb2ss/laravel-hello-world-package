@@ -5,5 +5,4 @@ use juniorb2ss\LaravelHelloWorldPackage\Exceptions\BaseException;
 
 class ConfigNotFoundException extends BaseException
 {
-
 }
