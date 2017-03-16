@@ -2,33 +2,68 @@
 namespace juniorb2ss\LaravelHelloWorldPackage\Tests;
 
 use juniorb2ss\LaravelHelloWorldPackage\TestCase;
+use juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage;
 
 /**
- *
+ * @coversDefaultClass \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage
  */
 class HelloWorldOutputTest extends TestCase
 {
-    public function testOutputIsHelloWorldString()
+    /**
+     * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::hasConfig
+     */
+    public function testHasConfig()
     {
-        $package = $this->getPackageInstance();
-        $this->assertEquals(
-            'Hello World from package!',
-            $package->output()
+        $method = $this->getProtectedMethod(
+            LaravelHelloWorldPackage::class,
+            [$this->mockConfig()],
+            'hasConfig'
+        );
+        
+        $this->assertTrue(
+            $method->invokeArgs(
+                $this->getPackageInstance(),
+                ['laravel-hello-world-package.message']
+            )
         );
     }
 
-    public function testChangeOutputString()
+    /**
+     * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::getConfig
+     */
+    public function testGetConfig()
     {
-        $this->configKeys = [
-            'laravel-hello-world-package.message' => 'Another!',
-        ];
-
-        $package = $this->getPackageInstance();
-
-        // test output
+        $method = $this->getProtectedMethod(
+            LaravelHelloWorldPackage::class,
+            [$this->mockConfig()],
+            'getConfig'
+        );
+        
         $this->assertEquals(
-            'Another!',
-            $package->output()
+            'Hello World from package!',
+            $method->invokeArgs(
+                $this->getPackageInstance(),
+                ['laravel-hello-world-package.message']
+            )
+        );
+    }
+
+    /**
+     * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::getMessageStringFromConfig
+     */
+    public function testGetMessageStringFromConfig()
+    {
+        $method = $this->getProtectedMethod(
+            LaravelHelloWorldPackage::class,
+            [$this->mockConfig()],
+            'getMessageStringFromConfig'
+        );
+        $this->assertEquals(
+            'Hello World from package!',
+            $method->invokeArgs(
+                $this->getPackageInstance(),
+                ['laravel-hello-world-package.message']
+            )
         );
     }
 
@@ -46,6 +81,36 @@ class HelloWorldOutputTest extends TestCase
         // test output
         $this->assertEquals(
             'fail!',
+            $package->output()
+        );
+    }
+
+     /**
+     * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::output
+     */
+    public function testOutputIsHelloWorldString()
+    {
+        $package = $this->getPackageInstance();
+        $this->assertEquals(
+            'Hello World from package!',
+            $package->output()
+        );
+    }
+
+    /**
+     * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::output
+     */
+    public function testChangeOutputString()
+    {
+        $this->configKeys = [
+            'laravel-hello-world-package.message' => 'Another!',
+        ];
+
+        $package = $this->getPackageInstance();
+
+        // test output
+        $this->assertEquals(
+            'Another!',
             $package->output()
         );
     }

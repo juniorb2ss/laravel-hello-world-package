@@ -14,11 +14,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->configKeys = [
-            'laravel-hello-world-package.message' => 'Hello World from package!',
-        ];
+        $this->configKeys = $this->getConfigArray();
 
-        $this->config = Mockery::mock(ConfigRepository::class);
+        $this->config = $this->mockConfig();
         $this->config->shouldReceive('has')->andReturnUsing(function ($key) {
             if (isset($this->configKeys[$key])) {
                 return true;
@@ -35,9 +33,32 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get protected method reflection
+     *
      */
-    protected static function getProtectedMethod($class, $name)
+    public function getConfigArray()
+    {
+        return [
+            'laravel-hello-world-package.message' => 'Hello World from package!',
+        ];
+    }
+
+    /**
+     *
+     */
+    public function mockConfig()
+    {
+        return Mockery::mock(ConfigRepository::class);
+    }
+
+    /**
+     * Get protected method reflection
+     * @param ClassName $class Class to reflection operations
+     * @param array $constructArgs Args to class construct
+     * @param string $name Method name
+     *
+     * @return object method visible instance
+     */
+    protected static function getProtectedMethod($class, $constructArgs, $name)
     {
         $class = new \ReflectionClass($class);
         $method = $class->getMethod($name);

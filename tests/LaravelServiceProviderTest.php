@@ -40,7 +40,7 @@ class LaravelServiceProviderTest extends TestCase
      */
     public function testGetConfigRepository()
     {
-        $method = $this->getProtectedMethod(LaravelServiceProvider::class, 'getConfigRepository');
+        $method = $this->getProtectedMethod(LaravelServiceProvider::class, [], 'getConfigRepository');
         $this->assertEquals(
             $this->config,
             $method->invokeArgs($this->provider, [])
