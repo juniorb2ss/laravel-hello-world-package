@@ -9,41 +9,43 @@ class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @inheritDoc
+     * @return object
      */
-    protected function setUp()
+    protected function prepareConfigMock()
     {
-        parent::setUp();
-
-        $this->configKeys = $this->getConfigArray();
-
         $this->config = $this->mockConfig();
+
         $this->config->shouldReceive('has')->andReturnUsing(function ($key) {
-            if (isset($this->configKeys[$key])) {
-                return true;
-            }
-            return false;
+            return array_has(
+                $this->getConfigArray(),
+                $key,
+                false
+            );
         });
 
         $this->config->shouldReceive('get')->andReturnUsing(function ($key) {
-            if (isset($this->configKeys[$key])) {
-                return $this->configKeys[$key];
-            }
-            return null;
+            return array_get(
+                $this->getConfigArray(),
+                $key,
+                null
+            );
         });
+
+        return $this->config;
     }
 
     /**
-     *
+     * Return config array
+     * @return array self::configs
      */
     public function getConfigArray()
     {
-        return [
-            'laravel-hello-world-package.message' => 'Hello World from package!',
-        ];
+        return $this->configs;
     }
 
     /**
-     *
+     * Get \Illuminate\Contracts\Config\Repository Mock
+     * @return object
      */
     public function mockConfig()
     {
@@ -63,6 +65,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $class = new \ReflectionClass($class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method;
     }
 
@@ -72,6 +75,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getPackageInstance()
     {
-        return new LaravelHelloWorldPackage($this->config);
+        $configMock = $this->prepareConfigMock();
+
+        return (new LaravelHelloWorldPackage($configMock));
     }
 }

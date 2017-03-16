@@ -10,6 +10,14 @@ use juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage;
 class HelloWorldOutputTest extends TestCase
 {
     /**
+     * Config keys
+     * @var array
+     */
+    protected $configs = [
+        'laravel-hello-world-package.message' => 'Hello World from package!',
+    ];
+
+    /**
      * @covers \juniorb2ss\LaravelHelloWorldPackage\LaravelHelloWorldPackage::hasConfig
      */
     public function testHasConfig()
@@ -72,16 +80,20 @@ class HelloWorldOutputTest extends TestCase
      */
     public function testException()
     {
-        $this->configKeys = [
-            '' => '',
-        ];
+        $this->configs = [];
 
-        $package = $this->getPackageInstance();
+        $method = $this->getProtectedMethod(
+            LaravelHelloWorldPackage::class,
+            [$this->mockConfig()],
+            'getConfig'
+        );
 
-        // test output
         $this->assertEquals(
-            'fail!',
-            $package->output()
+            'Hello World from package!',
+            $method->invokeArgs(
+                $this->getPackageInstance(),
+                ['laravel-hello-world-package.message']
+            )
         );
     }
 
@@ -102,7 +114,7 @@ class HelloWorldOutputTest extends TestCase
      */
     public function testChangeOutputString()
     {
-        $this->configKeys = [
+        $this->configs = [
             'laravel-hello-world-package.message' => 'Another!',
         ];
 

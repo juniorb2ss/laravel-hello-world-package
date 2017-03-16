@@ -34,7 +34,7 @@ class LaravelHelloWorldPackage
     public function getConfig($config)
     {
         if (!$this->hasConfig($config)) {
-            throw new ConfigNotFoundException();
+            throw new ConfigNotFoundException;
         }
 
         return ($this->config->get($config));
